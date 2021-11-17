@@ -39,6 +39,11 @@ jobs:
         run: cp target/containerproxy-*-exec.jar target/containerproxy-app-recovery.jar
       - name: Run Tests
         run: mvn -B test
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: logs
+          path: shinyproxy_recovery*.log
 
   dependency:
     runs-on: ubuntu-latest
