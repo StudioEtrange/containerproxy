@@ -58,6 +58,7 @@ public class TestAppRecovery extends KubernetesTestBase {
     private void assertEverythingCleanedUp() throws DockerCertificateException, DockerException, InterruptedException {
         // Docker
         DefaultDockerClient dockerClient = DefaultDockerClient.fromEnv().build();
+        System.out.println(dockerClient.listContainers());
         Assertions.assertEquals(0, dockerClient.listContainers().stream()
                 .filter(it -> !(it.labels() != null && it.labels().containsKey("created_by.minikube.sigs.k8s.io") && it.labels().get("created_by.minikube.sigs.k8s.io").equals("true")))
                 .count());
