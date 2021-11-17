@@ -61,6 +61,7 @@ public class TestAppRecovery extends KubernetesTestBase {
         System.out.println(dockerClient.listContainers());
         Assertions.assertEquals(0, dockerClient.listContainers().stream()
                 .filter(it -> !(it.labels() != null && it.labels().containsKey("created_by.minikube.sigs.k8s.io") && it.labels().get("created_by.minikube.sigs.k8s.io").equals("true")))
+                .filter(it -> !(it.labels() != null && it.labels().containsKey("io.kubernetes.pod.namespace")))
                 .count());
 
         // Docker swarm
